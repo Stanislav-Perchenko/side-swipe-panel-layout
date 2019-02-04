@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.alperez.widget.customlayout.SideSwipePanelLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/side_container_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:minDrawerMargin="220dp"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B0B0B0">
+
+        <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ToolbarTheme"
+            style="@style/ToolbarStyle" />
+
+        <ListView android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_margin="8dp"
+            android:background="#FFFFFF"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:fitsSystemWindows="true"
+        android:background="@android:color/white">
+        <include layout="@layout/long_vertical_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+
+</com.alperez.widget.customlayout.SideSwipePanelLayout>

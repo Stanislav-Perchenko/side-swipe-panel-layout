@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ToolbarStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="navigationIcon">@drawable/ic_navigation_back_white</item>
+        <item name="android:elevation">8dp</item>
+    </style>
+</resources>
