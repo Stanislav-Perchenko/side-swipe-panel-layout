@@ -5,4 +5,4 @@ The difference is that the Drawe pushes out the main content, not overlays it.
 
 This control supports only one Drawer on the left or right edge. This way the code was significantly optimized.
 
-![ScreenShot](https://raw.github.com/Stanislav-Perchenko/side-swipe-panel-layout/master/img.gif)
+![Output sample](https://raw.github.com/Stanislav-Perchenko/side-swipe-panel-layout/master/img.gif)
