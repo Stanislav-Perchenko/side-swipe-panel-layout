@@ -40,10 +40,11 @@ import static androidx.customview.widget.ViewDragHelper.STATE_DRAGGING;
 import static androidx.customview.widget.ViewDragHelper.STATE_IDLE;
 import static androidx.customview.widget.ViewDragHelper.STATE_SETTLING;
 
-
+/**
+ * Created by stanislav.perchenko on 30-01-2019
+ */
 @SuppressLint("RtlHardcoded")
 public class SideSwipePanelLayout extends ViewGroup {
-
     @IntDef({STATE_IDLE, STATE_DRAGGING, STATE_SETTLING})
     @Retention(RetentionPolicy.SOURCE)
     public @interface DrawerState {}
@@ -112,8 +113,8 @@ public class SideSwipePanelLayout extends ViewGroup {
     private float mScrimOpacity;
     private Paint mScrimPaint = new Paint();
 
-    private ViewDragHelper mDragger;
-    private ViewDragCallback mDraggerCallback;
+    private final ViewDragHelper mDragger;
+    private final ViewDragCallback mDraggerCallback;
     private int mDrawerState;
     private boolean mInLayout;
     private boolean mFirstLayout = true;
@@ -200,6 +201,15 @@ public class SideSwipePanelLayout extends ViewGroup {
         TypedArray a = context.getResources().obtainAttributes(attrs, R.styleable.SideSwipePanelLayout);
         mMinDrawerMargin = a.getDimensionPixelSize(R.styleable.SideSwipePanelLayout_minDrawerMargin, (int) (MIN_DRAWER_DEFAULT_MARGIN * density + 0.5f));
         a.recycle();
+
+
+        final float minVel = MIN_FLING_VELOCITY * density;
+        mDraggerCallback = new ViewDragCallback();
+        mDragger = ViewDragHelper.create(this, TOUCH_SLOP_SENSITIVITY, mDraggerCallback);
+        mDragger.setEdgeTrackingEnabled(0);
+        mDragger.setMinVelocity(minVel);
+        mDraggerCallback.setDragger(mDragger);
+
 
         // So that we can catch the back button
         setFocusableInTouchMode(true);
@@ -495,13 +505,7 @@ public class SideSwipePanelLayout extends ViewGroup {
 
     @Override
     protected void onAttachedToWindow() {
-        final float density = getResources().getDisplayMetrics().density;
-        final float minVel = MIN_FLING_VELOCITY * density;
-        mDraggerCallback = new ViewDragCallback();
-        mDragger = ViewDragHelper.create(this, TOUCH_SLOP_SENSITIVITY, mDraggerCallback);
         mDragger.setEdgeTrackingEnabled(checkDrawerViewAbsoluteGravity(Gravity.LEFT) ? ViewDragHelper.EDGE_LEFT : ViewDragHelper.EDGE_RIGHT);
-        mDragger.setMinVelocity(minVel);
-        mDraggerCallback.setDragger(mDragger);
 
         super.onAttachedToWindow();
         mFirstLayout = true;
